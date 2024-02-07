@@ -3,10 +3,14 @@ package org.exercises.from_API_to_DTO;
 import java.time.LocalDate;
 
 public class MovieDTO {
+    String title;
     String overview;
     String release_date;
+    Double vote_average;
     transient LocalDate release_date_as_local_date;
     transient String release_year;
+
+
 
     public String getOverview() {
         return overview;
@@ -40,10 +44,18 @@ public class MovieDTO {
         this.overview = overview;
     }
 
+    public void setVote_average(Double vote_average) {
+        this.vote_average = vote_average;
+    }
+
     @Override
     public String toString() {
         return "MovieDTO{" +
                 "overview='" + overview + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", vote_average=" + vote_average +
+                ", release_date_as_local_date=" + release_date_as_local_date +
+                ", release_year='" + release_year + '\'' +
                 '}';
     }
 }
