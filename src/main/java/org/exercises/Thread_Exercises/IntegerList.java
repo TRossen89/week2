@@ -6,7 +6,7 @@ import java.util.List;
 public class IntegerList {
 
     private static List<Integer> list = new ArrayList<>();
-    public void addCount(int count) {
+    public synchronized void addCount(int count) {
         list.add(count);
         System.out.println("Task: " + count + ": List size = " + list.size());
     }

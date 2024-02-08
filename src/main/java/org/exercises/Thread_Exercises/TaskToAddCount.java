@@ -12,7 +12,7 @@ public class TaskToAddCount implements Runnable{
     @Override
     public void run() {
         try {
-            Thread.sleep((int) Math.random()*800+200);
+            Thread.sleep((int) Math.random());
             integerList.addCount(count);
         } catch (InterruptedException ex) {
             System.out.println("Thread was interrupted");
