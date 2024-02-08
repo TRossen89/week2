@@ -1,4 +1,4 @@
-package org.exercises.from_API_to_DTO;
+package org.exercises.DTO_Exercises;
 
 import java.util.List;
 
