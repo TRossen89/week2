@@ -3,10 +3,7 @@ package org.exercises.Thread_Exercises;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ThreadExercises {
 
@@ -26,7 +23,24 @@ public class ThreadExercises {
             alphabetList.add(String.valueOf(ch));
         }
 
+
+        int timeBeforeKillingUnusedThread = 3;
+
         ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+
+        int cores = 4;
+        int coreMax = 4;
+
+        ExecutorService executorService1 =
+                new ThreadPoolExecutor(
+                        cores,
+                        coreMax,
+                        timeBeforeKillingUnusedThread,
+                        TimeUnit.MILLISECONDS,
+                        new ArrayBlockingQueue<>(200)
+                        );
+
         //ExecutorService executorService2 = Executors.newSingleThreadExecutor();
         //ExecutorService executorService3 = Executors.newCachedThreadPool();
 
