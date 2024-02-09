@@ -14,7 +14,7 @@ public class ThreadExercises {
     */
     public static void main(String[] args) {
 
-
+/*
         // ############### Exercise 1 #######################################################################
 
         List<String> alphabetList = new ArrayList<>();
@@ -23,24 +23,7 @@ public class ThreadExercises {
             alphabetList.add(String.valueOf(ch));
         }
 
-
-        int timeBeforeKillingUnusedThread = 3;
-
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-
-
-        int cores = 4;
-        int coreMax = 4;
-
-        ExecutorService executorService1 =
-                new ThreadPoolExecutor(
-                        cores,
-                        coreMax,
-                        timeBeforeKillingUnusedThread,
-                        TimeUnit.MILLISECONDS,
-                        new ArrayBlockingQueue<>(200)
-                        );
-
         //ExecutorService executorService2 = Executors.newSingleThreadExecutor();
         //ExecutorService executorService3 = Executors.newCachedThreadPool();
 
@@ -49,14 +32,6 @@ public class ThreadExercises {
 
         for (String s : alphabetList) {
             System.out.println("Submitting task for executorService");
-            /* executorService.submit(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(s + s + s);
-                }
-            });
-
-             */
 
             executorService.execute(new Runnable() {
                 @Override
@@ -65,7 +40,6 @@ public class ThreadExercises {
                 }
             });
         }
-
 
         System.out.println("Waiting for executorService to finish...");
         executorService.shutdown();
@@ -77,10 +51,18 @@ public class ThreadExercises {
         // The Counter class presented is already thread safe: The increment method is synchronized
 
 
+
+
+
+
+
+
         // ############### Exercise 3 #############################################################################
 
         // * First solution: Using synchronized in IntegerList
         ExecutorService workingJack = Executors.newFixedThreadPool(17);
+        //ExecutorService executorService2 = Executors.newSingleThreadExecutor();
+        //ExecutorService executorService3 = Executors.newCachedThreadPool();
 
         System.out.println("Main starts");
 
@@ -111,7 +93,7 @@ public class ThreadExercises {
         ExecutorService executorService5 = Executors.newCachedThreadPool();
 
         List<Future<Double>> futureList = new ArrayList<>();
-
+/*
         System.out.println("Second for loop starts...");
 
         for (int count = 0; count < 9000000; count++) {
@@ -137,6 +119,42 @@ public class ThreadExercises {
         executorService5.shutdown();
         //executorService6.shutdown();
 
+ */
+
+
+        // ############### Exercise 5 ##########################################################################
+
+
+
+
+        // ############### Exercise 6 ##########################################################################
+        String[] urls = new String[]{
+                "https://icanhazdadjoke.com/api",
+                "https://api.chucknorris.io/jokes/random",
+                "https://api.kanye.rest",
+                "https://api.whatdoestrumpthink.com/api/v1/quotes/random",
+                "https://api.spacexdata.com/v5/launches/latest"
+        };
+
+
+        //System.out.println(apiController.getResponseBody("https://api.chucknorris.io/jokes/random"));
+
+        ExecutorService executorService7 = Executors.newCachedThreadPool();
+
+        //APIController apiController = new APIController("https://api.chucknorris.io/jokes/random");
+
+        System.out.println("Different thread started...");
+        try {
+            Future<ChuckNorrisJokeDTO> future = executorService7.submit(new APIController("https://api.chucknorris.io/jokes/random"));
+            System.out.println(future.get().getValue());
+        } catch (Exception e) {
+
+        }
+        System.out.println("Executor service shuts down:");
+        executorService7.shutdown();
+        System.out.println("Main done");
+
+        //System.out.println(chuckNorrisJoke.getValue());
 
     }
 }
