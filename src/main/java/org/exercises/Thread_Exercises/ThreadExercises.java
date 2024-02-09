@@ -7,14 +7,9 @@ import java.util.concurrent.*;
 
 public class ThreadExercises {
 
-    /* SPØRGSMÅL:
-
-        1) Kan jeg sørge for at computeren rent faktisk bruger de fysiske threads i computerens CPU?
-
-    */
     public static void main(String[] args) {
 
-/*
+
         // ############### Exercise 1 #######################################################################
 
         List<String> alphabetList = new ArrayList<>();
@@ -51,12 +46,6 @@ public class ThreadExercises {
         // The Counter class presented is already thread safe: The increment method is synchronized
 
 
-
-
-
-
-
-
         // ############### Exercise 3 #############################################################################
 
         // * First solution: Using synchronized in IntegerList
@@ -78,12 +67,6 @@ public class ThreadExercises {
         // created in the ExecutorService.
 
 
-
-
-
-
-
-
         // ############### Exercise 4 ##########################################################################
 
         // Trying to put all my computer's core to work (see also the class CallableTask - this task, and the for
@@ -93,7 +76,7 @@ public class ThreadExercises {
         ExecutorService executorService5 = Executors.newCachedThreadPool();
 
         List<Future<Double>> futureList = new ArrayList<>();
-/*
+
         System.out.println("Second for loop starts...");
 
         for (int count = 0; count < 9000000; count++) {
@@ -118,43 +101,6 @@ public class ThreadExercises {
         System.out.println("Main is done");
         executorService5.shutdown();
         //executorService6.shutdown();
-
- */
-
-
-        // ############### Exercise 5 ##########################################################################
-
-
-
-
-        // ############### Exercise 6 ##########################################################################
-        String[] urls = new String[]{
-                "https://icanhazdadjoke.com/api",
-                "https://api.chucknorris.io/jokes/random",
-                "https://api.kanye.rest",
-                "https://api.whatdoestrumpthink.com/api/v1/quotes/random",
-                "https://api.spacexdata.com/v5/launches/latest"
-        };
-
-
-        //System.out.println(apiController.getResponseBody("https://api.chucknorris.io/jokes/random"));
-
-        ExecutorService executorService7 = Executors.newCachedThreadPool();
-
-        //APIController apiController = new APIController("https://api.chucknorris.io/jokes/random");
-
-        System.out.println("Different thread started...");
-        try {
-            Future<ChuckNorrisJokeDTO> future = executorService7.submit(new APIController("https://api.chucknorris.io/jokes/random"));
-            System.out.println(future.get().getValue());
-        } catch (Exception e) {
-
-        }
-        System.out.println("Executor service shuts down:");
-        executorService7.shutdown();
-        System.out.println("Main done");
-
-        //System.out.println(chuckNorrisJoke.getValue());
 
     }
 }
