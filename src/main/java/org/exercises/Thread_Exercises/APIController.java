@@ -12,17 +12,34 @@ import java.util.concurrent.Callable;
 public class APIController implements Callable {
 
 
-    String url;
+
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public APIController(String url) {
+    String url;
+    String api;
+
+    public APIController(String url, String api) {
         this.url = url;
+        this.api = api;
     }
 
-    public ChuckNorrisJokeDTO getJoke(String url) {
+
+
+    public APIInformation getAPIInformation(String url, String info) {
+
         String res = getResponseBody(url);
-        ChuckNorrisJokeDTO joke = gson.fromJson(res, ChuckNorrisJokeDTO.class);
-        return joke;
+
+        switch (info){
+            case "dad_joke":
+                DadJokeDTO dadJoke = gson.fromJson(res, DadJokeDTO.class);
+                return dadJoke;
+
+            case "chuck_norris":
+                ChuckNorrisJokeDTO chuckNorrisJokeDTO = gson.fromJson(res, ChuckNorrisJokeDTO.class);
+                return chuckNorrisJokeDTO;
+        }
+
+        return null;
     }
 
     public String getResponseBody(String url) {
@@ -37,18 +54,19 @@ public class APIController implements Callable {
         try {
             response = client.newCall(request).execute();
             String res = response.body().string();
-            System.out.println(res);
+            //System.out.println(res);
             return res;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public Object call() throws Exception {
 
-        ChuckNorrisJokeDTO apiInformation = getJoke(this.url);
+    public APIInformation call() throws Exception {
+
+        APIInformation apiInformation = getAPIInformation(this.url, this.api);
 
         return apiInformation;
     }
+
 }
