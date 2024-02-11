@@ -1,4 +1,4 @@
-[
+{ "listOfAllUsers": [
   {
     "firstName": "John",
     "lastName": "Doe",
@@ -90,3 +90,4 @@
     }
   }
 ]
+}

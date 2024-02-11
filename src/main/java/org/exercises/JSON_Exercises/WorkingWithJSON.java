@@ -37,7 +37,19 @@ public class WorkingWithJSON {
      */
 
 
+
+
+
+
     public static void main(String[] args) {
+
+        // ############### Part 3 ################
+
+        APIController apiController = new APIController();
+
+        AllUsersDTO allUsersDTO = apiController.allUsersToDTO("src/main/java/org/exercises/JSON_Exercises/account.json");
+
+        allUsersDTO.getUserDTOList().stream().forEach(dto -> System.out.println(dto));
 
     }
 }
