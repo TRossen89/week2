@@ -9,43 +9,21 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
-public class APIController implements Callable {
-
-
-
+public class TestAPIController implements Callable {
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     String url;
     String api;
 
-    public APIController(String url, String api) {
+    public TestAPIController(String url, String api) {
         this.url = url;
         this.api = api;
     }
 
-
-
-    public APIInformation getAPIInformation(String url, String info) {
-
-        String res = getResponseBody(url);
-
-        switch (info){
-            case "dad_joke":
-                DadJokeDTO dadJoke = gson.fromJson(res, DadJokeDTO.class);
-                return dadJoke;
-
-            case "chuck_norris":
-                ChuckNorrisJokeDTO chuckNorrisJokeDTO = gson.fromJson(res, ChuckNorrisJokeDTO.class);
-                return chuckNorrisJokeDTO;
-
-            case "kanye":
-                KanyeDTO kanyeDTO = gson.fromJson(res, KanyeDTO.class);
-                return kanyeDTO;
-        }
-
-        return null;
+    public MegaDTO setMegaDTO(String res){
+        MegaDTO megaDTO = gson.fromJson(res, MegaDTO.class);
+        return megaDTO;
     }
-
     public String getResponseBody(String url) {
         // Using OkHttp: Can sometime cause program to hang. Then use Apache HttpClient instead.
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -65,12 +43,11 @@ public class APIController implements Callable {
         }
     }
 
+    @Override
+    public String call() throws Exception {
 
-    public APIInformation call() throws Exception {
-
-        APIInformation apiInformation = getAPIInformation(this.url, this.api);
+        String apiInformation = getResponseBody(this.url);
 
         return apiInformation;
     }
-
 }

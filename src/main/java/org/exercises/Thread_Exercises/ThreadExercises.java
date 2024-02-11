@@ -110,22 +110,18 @@ public class ThreadExercises {
         hashMapOfUrls.put("dad_joke", "https://icanhazdadjoke.com/");
         hashMapOfUrls.put("chuck_norris", "https://api.chucknorris.io/jokes/random");
         hashMapOfUrls.put("kanye", "https://api.kanye.rest");
-
         /*
         hashMapOfUrls.put("trump", "https://api.whatdoestrumpthink.com/api/v1/quotes/random");
         hashMapOfUrls.put("spacex", "https://api.spacexdata.com/v5/launches/latest");
 
          */
 
-
         List<Future<APIInformation>> listOfFutures = new ArrayList<>();
+
 
         ExecutorService executorService7 = Executors.newCachedThreadPool();
 
         for (Map.Entry<String, String> h : hashMapOfUrls.entrySet()) {
-
-
-            System.out.println("Key: " + h.getKey() + "\nValue: " + h.getValue() + "\n");
 
             Future<APIInformation> future = executorService7.submit(new APIController(h.getValue(), h.getKey()));
             listOfFutures.add(future);
@@ -133,17 +129,28 @@ public class ThreadExercises {
 
         System.out.println("Executor Service in work...");
 
+        MegaDTO megaDTO = new MegaDTO();
+
         for (Future<APIInformation> fut : listOfFutures) {
             try {
                 APIInformation apiInformation = fut.get();
+
+                // Setting string values in medaDTO
+                megaDTO.setValue(apiInformation.getAPI(), apiInformation.getValue());
+
+                // Adding to list of DTOs in megaDTO
+                megaDTO.addToList(apiInformation);
+
+                // Printing out jokes and quotes
                 apiInformation.printAPIInfo();
 
             } catch (Exception ex) {
                 System.out.println("Exception: " + ex.getMessage());
             }
         }
-
         executorService7.shutdown();
+
+        System.out.println(megaDTO);
     }
 }
 

@@ -32,6 +32,16 @@ public class DadJokeDTO implements APIInformation {
     }
 
     public void printAPIInfo() {
-        System.out.println(joke);
+        System.out.println("Dad joke: " + joke);
+    }
+
+    @Override
+    public String getValue() {
+        return joke;
+    }
+
+    @Override
+    public String getAPI() {
+        return "dad_joke";
     }
 }

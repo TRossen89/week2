@@ -19,6 +19,11 @@ public class ChuckNorrisJokeDTO implements APIInformation{
 
     @Override
     public void printAPIInfo() {
-        System.out.println(value);
+        System.out.println("Chuck Norris joke: " +value);
+    }
+
+    @Override
+    public String getAPI() {
+        return "chuck_norris";
     }
 }
